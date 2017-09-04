@@ -1,0 +1,24 @@
+//untag everything
+app.activeDocument.xmlElements[0].xmlElements.everyItem().untag();
+//remove leftover attributes
+var flag = true;
+while(flag){
+try{
+app.activeDocument.xmlElements.item(0).xmlAttributes.firstItem().remove();
+}
+catch(e){flag = false;}
+}
+//remove leftover processing instructions
+try{
+app.activeDocument.xmlInstructions[0].remove();
+}
+catch(e){};
+//delete tags
+app.activeDocument.deleteUnusedTags();
+//rename root tag back to default
+var myRoot = app.activeDocument.xmlTags[0].name;
+app.activeDocument.xmlTags.itemByName(myRoot).name = "Root";
+//remove leftover text in root element
+var tempRect = app.documents[0].rectangles.add();
+tempRect.markup(app.documents[0].xmlElements[0]);
+tempRect.remove();

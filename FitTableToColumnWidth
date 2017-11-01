@@ -1,5 +1,6 @@
 var myDoc = app.activeDocument;
 
+adjustTableWidths();
 
 function adjustTableWidths() {
 	var myFrames = myDoc.textFrames;

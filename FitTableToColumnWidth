@@ -1,0 +1,18 @@
+var myDoc = app.activeDocument;
+
+
+function adjustTableWidths() {
+	var myFrames = myDoc.textFrames;
+	var myTables, t, c, w;
+	for (var T = 0; T < myFrames.length; T++) {
+		myTables = myFrames[T].tables;
+		for (var i = 0; i < myTables.length; i++) {
+			c = myTables[i].columns.length;
+			t = myTables[i].tables[0];
+			w = myFrames[T].textFramePreferences.textColumnFixedWidth
+			for (var j = 0; j < t.columns.length; j++) {
+				t.columns[j].width = (w / c) * 1;
+			}
+		}
+	}
+}
